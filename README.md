@@ -1,59 +1,102 @@
-# MongoDB Fundamentals - Week 1
 
-## Setup Instructions
+# How to Run and Install Dependencies
 
-Before you begin this assignment, please make sure you have the following installed:
+This guide explains how to set up your environment, install all required dependencies, and run the MongoDB scripts for this assignment.
 
-1. **MongoDB Community Edition** - [Installation Guide](https://www.mongodb.com/docs/manual/administration/install-community/)
-2. **MongoDB Shell (mongosh)** - This is included with MongoDB Community Edition
-3. **Node.js** - [Download here](https://nodejs.org/)
+## Prerequisites
 
-### Node.js Package Setup
+Before you begin, make sure you have the following installed on your system:
 
-Once you have Node.js installed, run the following commands in your assignment directory:
+1. **Node.js** (v18 or higher)
+    - Download and install from: https://nodejs.org/
+    - To verify installation, run:
+       ```powershell
+       node -v
+       npm -v
+       ```
+2. **MongoDB Community Edition**
+    - Download and install from: https://www.mongodb.com/try/download/community
+    - Follow the official installation guide for your OS.
+    - After installation, start the MongoDB server:
+       ```powershell
+       net start MongoDB
+       ```
+    - Or, if using `mongod` directly:
+       ```powershell
+       mongod
+       ```
+3. **MongoDB Shell (mongosh)**
+    - Usually included with MongoDB Community Edition.
+    - To verify, run:
+       ```powershell
+       mongosh
+       ```
 
-```bash
-# Initialize a package.json file
-npm init -y
+## Project Setup
 
-# Install the MongoDB Node.js driver
-npm install mongodb
-```
+1. **Clone the Repository**
+    - If you have a GitHub repository, clone it:
+       ```powershell
+       git clone <your-repo-url>
+       cd <your-repo-folder>
+       ```
 
-## Assignment Overview
+2. **Initialize Node.js Project**
+    - If not already initialized, create a `package.json`:
+       ```powershell
+       npm init -y
+       ```
 
-This week focuses on MongoDB fundamentals including:
-- Creating and connecting to MongoDB databases
-- CRUD operations (Create, Read, Update, Delete)
-- MongoDB queries and filters
-- Aggregation pipelines
-- Indexing for performance
+3. **Install Dependencies**
+    - Install the MongoDB Node.js driver:
+       ```powershell
+       npm install mongodb
+       ```
+    - (Optional) If you want to use environment variables, install dotenv:
+       ```powershell
+       npm install dotenv
+       ```
 
-## Submission
+## Populating the Database
 
-Complete all the exercises in this assignment and push your code to GitHub using the provided GitHub Classroom link.
+Before running queries, you need to insert sample data:
 
-## Getting Started
+1. Run the data population script:
+    ```powershell
+    node insert_books.js
+    ```
+    - This will create and populate the `books` collection in your MongoDB database.
 
-1. Accept the GitHub Classroom assignment invitation
-2. Clone your personal repository that was created by GitHub Classroom
-3. Install MongoDB locally or set up a MongoDB Atlas account
-4. Run the provided `insert_books.js` script to populate your database
-5. Complete the tasks in the assignment document
+## Running the Queries
 
-## Files Included
+1. Execute the queries script:
+    ```powershell
+    node queries.js
+    ```
+    - This will run all the MongoDB queries and print results to your terminal.
 
-- `Week1-Assignment.md`: Detailed assignment instructions
-- `insert_books.js`: Script to populate your MongoDB database with sample book data
+## Troubleshooting
 
-## Requirements
+- If you get connection errors, ensure MongoDB is running and the URI in `queries.js` matches your setup.
+- For Windows, you may need to add MongoDB binaries to your PATH.
+- If you install dependencies globally, use `npm list -g` to verify.
 
-- Node.js (v18 or higher)
-- MongoDB (local installation or Atlas account)
-- MongoDB Shell (mongosh) or MongoDB Compass
+## Useful Commands
 
-## Resources
+- To check installed packages:
+   ```powershell
+   npm list
+   ```
+- To update npm:
+   ```powershell
+   npm install -g npm
+   ```
+- To remove `node_modules` and reinstall:
+   ```powershell
+   rm -r node_modules
+   npm install
+   ```
 
-- [MongoDB Documentation](https://docs.mongodb.com/)
-- [MongoDB University](https://university.mongodb.com/)
-- [MongoDB Node.js Driver](https://mongodb.github.io/node-mongodb-native/) 
+---
+
+You are now ready to run and experiment with MongoDB scripts for this assignment!

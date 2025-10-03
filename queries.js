@@ -86,18 +86,33 @@ async function runQueries() {
     console.log('Author with the most books:', authorWithMostBooks);
 
     // pipeline that groups books by publication decade and counts them
-
+    const booksByDecade = await collection.aggregate([
+      { $group: {
+          _id: { $subtract: [
+            "$published_year", { $mod: [ "$published_year", 10 ] }
+          ] },
+          count: { $sum: 1 } 
+        }
+      },
+      { $sort: { _id: 1 } }]).toArray();
+    console.log('Books grouped by publication decade:', booksByDecade);
 
 
     // Task 5: Indexing
 
     // index on the title field
-
+      await collection.createIndex({title: 1});
+      console.log('Index created on title field');
 
     // compound index on author and published_year
-
+      await collection.createIndex({author: 1, published_year: -1});
+      console.log('Compound index created on author and published_year fields');
 
     // explain to demostrate the perfomance improvement with the indexes
+    const explainResult = await collection.find({author: "Jane Austen"})
+    .sort({published_year: -1})
+    .explain("executionStats");
+    console.log('Explain output for query with index:', explainResult);
 
 
   } catch (error) {
